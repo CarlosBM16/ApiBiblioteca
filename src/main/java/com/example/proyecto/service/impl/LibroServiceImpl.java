@@ -3,6 +3,7 @@ package com.example.proyecto.service.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import com.example.proyecto.dtos.request.create.LibroCreateDTO;
 import com.example.proyecto.dtos.response.LibroDTO;
 import com.example.proyecto.mapper.LibroMapper;
 import com.example.proyecto.model.Libro;
@@ -33,4 +34,15 @@ public class LibroServiceImpl implements LibroService{
 
         return libroMapper.toDto(libro);
     }
+
+    @Override
+    public LibroDTO crearLibro(LibroCreateDTO dto) {
+        Libro libro = libroMapper.toEntity(dto);
+
+        Libro libroGuardado = libroRepository.save(libro);
+
+        return libroMapper.toDto(libroGuardado);
+    }
+
+    
 }

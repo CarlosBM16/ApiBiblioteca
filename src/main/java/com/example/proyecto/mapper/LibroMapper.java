@@ -2,6 +2,7 @@ package com.example.proyecto.mapper;
 
 import org.springframework.stereotype.Component;
 
+import com.example.proyecto.dtos.request.create.LibroCreateDTO;
 import com.example.proyecto.dtos.response.LibroDTO;
 import com.example.proyecto.model.Libro;
 
@@ -22,5 +23,16 @@ public class LibroMapper {
         dto.setTitulo(libro.getTitulo());
 
         return dto;
+    }
+
+    public Libro toEntity(LibroCreateDTO dto) {
+        if (dto == null) return null;
+
+        Libro libro = new Libro();
+        libro.setTitulo(dto.getTitulo());
+        libro.setAutor(dto.getAutor());
+
+        return libro;
+
     }
 }
