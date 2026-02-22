@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.example.proyecto.dtos.request.create.LibroCreateDTO;
+import com.example.proyecto.dtos.request.update.LibroUpdateDTO;
 import com.example.proyecto.dtos.response.LibroDTO;
 import com.example.proyecto.mapper.LibroMapper;
 import com.example.proyecto.model.Libro;
@@ -42,6 +43,19 @@ public class LibroServiceImpl implements LibroService{
         Libro libroGuardado = libroRepository.save(libro);
 
         return libroMapper.toDto(libroGuardado);
+    }
+
+    @Override
+    public LibroDTO actualizarLibro(Long id, LibroUpdateDTO dto) {
+        Libro libroExistente = libroRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Libro con id " + id + " no encontrado"));
+
+        libroMapper.updateEntityFromDto(dto, libroExistente);
+
+        Libro libroActualizado = libroRepository.save(libroExistente);
+
+        return libroMapper.toDto(libroActualizado);
+
     }
 
     
