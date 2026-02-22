@@ -58,5 +58,11 @@ public class LibroServiceImpl implements LibroService{
 
     }
 
-    
+    @Override
+    public void eliminarLibro(Long id) {
+        Libro libro = libroRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Libro con id " + id + " no encontrado"));
+
+            libroRepository.delete(libro);
+    }
 }

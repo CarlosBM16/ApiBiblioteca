@@ -11,4 +11,5 @@ public interface SocioService {
     SocioDTO obtenerSocioPorId(Long id);
     SocioDTO crearSocio(SocioCreateDTO dto);
     SocioDTO actualizarSocio(Long id, SocioUpdateDTO dto);
+    void eliminarSocio(Long id);
 }

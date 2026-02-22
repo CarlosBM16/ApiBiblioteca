@@ -66,7 +66,14 @@ public class SocioServiceImpl implements SocioService {
         Socio socioActualizado = socioRepository.save(socioExistente);
 
         return socioMapper.toDto(socioActualizado);
-
     }
-    
+
+    @Override
+    @Transactional
+    public void eliminarSocio(Long id) {
+        Socio socio = socioRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Socio con id " + id + " no encontrado"));
+
+        socioRepository.delete(socio);
+    }
 }

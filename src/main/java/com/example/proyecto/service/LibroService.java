@@ -11,4 +11,5 @@ public interface LibroService {
     LibroDTO obtenerLibroPorId(Long id);
     LibroDTO crearLibro(LibroCreateDTO dto);
     LibroDTO actualizarLibro(Long id, LibroUpdateDTO dto);
+    void eliminarLibro(Long id);
 }
