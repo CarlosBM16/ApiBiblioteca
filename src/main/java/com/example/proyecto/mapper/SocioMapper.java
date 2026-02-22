@@ -4,8 +4,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import com.example.proyecto.dtos.request.create.SocioCreateDTO;
 import com.example.proyecto.dtos.response.LibroDTO;
 import com.example.proyecto.dtos.response.SocioDTO;
+import com.example.proyecto.model.Libro;
 import com.example.proyecto.model.Socio;
 
 import lombok.Data;
@@ -16,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class SocioMapper {
     private final PerfilMapper perfilMapper;
+    private final LibroMapper libroMapper;
 
     public SocioDTO toDto(Socio socio) {
         if (socio == null) return null;
@@ -40,5 +43,27 @@ public class SocioMapper {
         }
 
         return dto;
+    }
+
+    public Socio toEntity(SocioCreateDTO dto) {
+        if (dto == null) return null;
+
+        Socio socio = new Socio();
+        socio.setNombre(dto.getNombre());
+        socio.setEmail(dto.getEmail());
+
+        if (dto.getLibros() != null) {
+            // Se mapea cada libro para transformarlo en entity
+            socio.setLibros(dto.getLibros().stream().map(libroDto -> {
+                Libro libro = libroMapper.toEntity(libroDto); 
+                libro.setSocio(socio); 
+                return libro;
+            }).collect(Collectors.toList()));
+        }
+
+        socio.setPerfil(perfilMapper.toEntity(dto.getPerfil()));
+        socio.getPerfil().setSocio(socio);
+
+        return socio;
     }
 }

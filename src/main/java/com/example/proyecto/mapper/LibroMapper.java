@@ -33,6 +33,5 @@ public class LibroMapper {
         libro.setAutor(dto.getAutor());
 
         return libro;
-
     }
 }

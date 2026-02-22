@@ -2,6 +2,7 @@ package com.example.proyecto.mapper;
 
 import org.springframework.stereotype.Component;
 
+import com.example.proyecto.dtos.request.create.PerfilCreateDTO;
 import com.example.proyecto.dtos.response.PerfilDTO;
 import com.example.proyecto.model.Perfil;
 
@@ -22,5 +23,15 @@ public class PerfilMapper {
         dto.setFechaRegistro(perfil.getFecha_registro());
 
         return dto;
+    }
+
+    public Perfil toEntity(PerfilCreateDTO dto) {
+        if (dto == null) return null;
+
+        Perfil perfil = new Perfil();
+        perfil.setBiografia(dto.getBiografia());
+        perfil.setFecha_registro(dto.getFechaRegistro());
+        
+        return perfil;
     }
 }

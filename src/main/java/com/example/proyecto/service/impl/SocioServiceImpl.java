@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
+import com.example.proyecto.dtos.request.create.SocioCreateDTO;
 import com.example.proyecto.dtos.response.SocioDTO;
 import com.example.proyecto.mapper.SocioMapper;
 import com.example.proyecto.model.Socio;
@@ -33,6 +34,16 @@ public class SocioServiceImpl implements SocioService {
             .orElseThrow(() -> new NoSuchElementException("Socio con id " + id + " no encontrado"));
 
         return socioMapper.toDto(socio);
+    }
+
+    @Override
+    public SocioDTO crearSocio(SocioCreateDTO dto) {
+        Socio socio = socioMapper.toEntity(dto);
+
+        socio.getPerfil().setSocio(socio);
+
+        Socio socioGuardado = socioRepository.save(socio);
+        return socioMapper.toDto(socioGuardado);
     }
     
 }

@@ -1,5 +1,6 @@
 package com.example.proyecto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,7 +34,7 @@ public class Socio {
     @JsonManagedReference
     private Perfil perfil; 
 
-    @OneToMany(mappedBy = "socio")
+    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Libro> libros;
+    private List<Libro> libros = new ArrayList<>();
 }
