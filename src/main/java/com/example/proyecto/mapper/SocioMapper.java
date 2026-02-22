@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.example.proyecto.dtos.request.create.SocioCreateDTO;
+import com.example.proyecto.dtos.request.update.SocioUpdateDTO;
 import com.example.proyecto.dtos.response.LibroDTO;
 import com.example.proyecto.dtos.response.SocioDTO;
 import com.example.proyecto.model.Libro;
@@ -65,5 +66,13 @@ public class SocioMapper {
         socio.getPerfil().setSocio(socio);
 
         return socio;
+    }
+
+    public void updateEntityFromDto(SocioUpdateDTO dto, Socio socio) {
+        if (dto == null || socio == null) return;
+
+        socio.setNombre(dto.getNombre());
+        socio.setEmail(dto.getEmail());
+        perfilMapper.updateEntityFromDto(dto.getPerfil(), socio.getPerfil());
     }
 }

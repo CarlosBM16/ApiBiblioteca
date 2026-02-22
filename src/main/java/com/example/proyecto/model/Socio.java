@@ -35,7 +35,7 @@ public class Socio {
     private Perfil perfil; 
 
     // Cascade all para persistir los libros del socio en el Post
-    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Libro> libros = new ArrayList<>();
 }
