@@ -3,6 +3,8 @@ package com.example.proyecto.service.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.stereotype.Service;
+
 import com.example.proyecto.dtos.request.create.LibroCreateDTO;
 import com.example.proyecto.dtos.request.update.LibroUpdateDTO;
 import com.example.proyecto.dtos.response.LibroDTO;
@@ -10,7 +12,6 @@ import com.example.proyecto.mapper.LibroMapper;
 import com.example.proyecto.model.Libro;
 import com.example.proyecto.repository.LibroRepository;
 import com.example.proyecto.service.LibroService;
-import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
@@ -63,6 +64,6 @@ public class LibroServiceImpl implements LibroService{
         Libro libro = libroRepository.findById(id)
             .orElseThrow(() -> new NoSuchElementException("Libro con id " + id + " no encontrado"));
 
-            libroRepository.delete(libro);
+            libroRepository.deleteById(libro.getId_libro());
     }
 }
